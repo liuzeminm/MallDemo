@@ -1,0 +1,59 @@
+package cn.util;
+
+import cn.pojo.Commodity;
+import cn.pojo.Goodsdetails;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Page {
+
+        private Integer index; // 当前页码
+        private Integer pageSize=20; // 每页显示的条目数
+        private Integer totalCount; // 总记录数
+        private Integer totalPageCount; //总页数
+
+
+
+    private List<Commodity> deptlist = new ArrayList<>();//集合
+    public  List<Commodity> getDeptlist() {
+        return deptlist;
+    }
+
+    public void setDeptlist(List<Commodity> deptlist) {
+        this.deptlist = deptlist;
+    }
+
+
+    public Integer getIndex() {
+            return index;
+        }
+        public void setIndex(Integer index) {
+            if (index < 1){
+                index = 1;
+            }
+            if (index > getTotalPageCount()){
+                index = totalPageCount;
+            }
+            this.index = index;
+        }
+        public Integer getPageSize() {
+            return pageSize;
+        }
+        public void setPageSize(Integer pageSize) {
+            this.pageSize = pageSize;
+        }
+        public Integer getTotalCount() {
+            return totalCount;
+        }
+        public void setTotalCount(Integer totalCount) {
+            this.totalCount = totalCount;
+        }
+
+        public Integer getTotalPageCount() {
+            return totalPageCount = totalCount % pageSize == 0
+                    ? totalCount / pageSize : totalCount / pageSize + 1;
+        }
+    }
+
+

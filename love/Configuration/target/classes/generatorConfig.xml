@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE generatorConfiguration
+
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+
+
+<generatorConfiguration>
+
+    <!--mysql 连接数据库jar 这里选择自己本地位置-->
+
+    <classPathEntry location="D:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+
+    <context id="testTables" targetRuntime="MyBatis3">
+
+        <commentGenerator>
+
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+
+            <property name="suppressAllComments" value="true" />
+
+        </commentGenerator>
+
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+
+                        connectionURL="jdbc:mysql://123.207.166.185:3306/smallemperorbook" userId="liuzemin"
+
+                        password="liuzemin">
+
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+
+           NUMERIC 类型解析为java.math.BigDecimal -->
+
+        <javaTypeResolver>
+
+            <property name="forceBigDecimals" value="false" />
+
+        </javaTypeResolver>
+
+
+
+        <!-- targetProject:生成PO类的位置 -->
+
+        <javaModelGenerator targetPackage="cn.pojo"
+
+                            targetProject="src/main/java">
+
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+
+            <property name="enableSubPackages" value="false" />
+
+            <!-- 从数据库返回的值被清理前后的空格 -->
+
+            <property name="trimStrings" value="true" />
+
+        </javaModelGenerator>
+
+        <!-- targetProject:mapper映射文件生成的位置
+
+           如果maven工程只是单独的一个工程，targetProject="src/main/java"
+
+           若果maven工程是分模块的工程，targetProject="所属模块的名称"，例如：
+
+           targetProject="ecps-manager-mapper"，下同-->
+
+        <sqlMapGenerator targetPackage="cn.mapper"
+
+                         targetProject="src/main/java">
+
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+
+            <property name="enableSubPackages" value="false" />
+
+        </sqlMapGenerator>
+
+        <!-- targetPackage：mapper接口生成的位置 -->
+
+        <javaClientGenerator type="XMLMAPPER"
+
+                             targetPackage="cn.dao"
+
+                             targetProject="src/main/java">
+
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+
+            <property name="enableSubPackages" value="false" />
+
+        </javaClientGenerator>
+
+        <!-- 指定数据库表 -->
+
+        <table schema="" tableName="activity"></table>
+        <table schema="" tableName="attention"></table>
+        <table schema="" tableName="blackcardmember"></table>
+        <table schema="" tableName="blackcardtype"></table>
+        <table schema="" tableName="brand"></table>
+        <table schema="" tableName="branddiscount"></table>
+        <table schema="" tableName="brandgoods"></table>
+        <table schema="" tableName="brandnotes"></table>
+        <table schema="" tableName="classificationgoods"></table>
+        <table schema="" tableName="collect"></table>
+        <table schema="" tableName="commodity"></table>
+        <table schema="" tableName="commodityprices"></table>
+        <table schema="" tableName="goodsclass"></table>
+        <table schema="" tableName="goodscomments"></table>
+        <table schema="" tableName="goodsdetails"></table>
+        <table schema="" tableName="honourenjoygoods"></table>
+        <table schema="" tableName="identification"></table>
+        <table schema="" tableName="label"></table>
+        <table schema="" tableName="like"></table>
+        <table schema="" tableName="merchant"></table>
+        <table schema="" tableName="merchantsfans"></table>
+        <table schema="" tableName="note"></table>
+        <table schema="" tableName="notecomments"></table>
+        <table schema="" tableName="notefiltering"></table>
+        <table schema="" tableName="noteimage"></table>
+        <table schema="" tableName="notenote"></table>
+        <table schema="" tableName="notesdraft"></table>
+        <table schema="" tableName="notesorting"></table>
+        <table schema="" tableName="notesvideo"></table>
+        <table schema="" tableName="orderform"></table>
+        <table schema="" tableName="orderprice"></table>
+        <table schema="" tableName="prerogative"></table>
+        <table schema="" tableName="report"></table>
+        <table schema="" tableName="savethat"></table>
+        <table schema="" tableName="search"></table>
+        <table schema="" tableName="shippinginformation"></table>
+        <table schema="" tableName="shoppingtrolley"></table>
+        <table schema="" tableName="sortord"></table>
+        <table schema="" tableName="sourceofcommoditysales"></table>
+        <table schema="" tableName="useri"></table>
+        <table schema="" tableName="usermessage"></table>
+
+
+
+
+
+
+
+
+    </context>
+
+</generatorConfiguration>

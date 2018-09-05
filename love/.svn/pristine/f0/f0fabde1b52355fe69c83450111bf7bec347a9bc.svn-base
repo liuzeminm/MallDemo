@@ -1,0 +1,41 @@
+package cn.dao;
+
+import cn.pojo.Commodity;
+import cn.pojo.CommodityExample;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface ICommodityDao {
+
+    //增加信息
+    int insertPiceter(@Param("cd") Commodity cd);
+
+    //查几条信息
+    int   selCount(@Param("state") int state);
+    
+    //分页
+    List<Commodity>  selDetails (@Param("state") int  state,@Param("index") int index, @Param("pagesize")int pagesize);
+
+    int countByExample(CommodityExample example);
+
+    int deleteByExample(CommodityExample example);
+
+    int deleteByPrimaryKey(Integer comid);
+
+    int insert(Commodity record);
+
+    int insertSelective(Commodity record);
+
+    List<Commodity> selectByExample(CommodityExample example);
+
+    Commodity selectByPrimaryKey(Integer comid);
+
+    int updateByExampleSelective(@Param("record") Commodity record, @Param("example") CommodityExample example);
+
+    int updateByExample(@Param("record") Commodity record, @Param("example") CommodityExample example);
+
+    int updateByPrimaryKeySelective(Integer i);
+
+    int updateByPrimaryKey(Integer i , Integer id);
+}

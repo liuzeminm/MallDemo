@@ -1,0 +1,39 @@
+package cn.controller;
+
+import cn.pojo.Goodsdetails;
+import cn.service.SelIgoodsdetailsService;
+import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
+//ajax查询下面的分支
+@Api(tags = "ajax查询分支商品名称")
+@RestController
+@RequestMapping
+public class SelIgoodsdetailsController {
+    @Resource(name = "sgs")
+    private SelIgoodsdetailsService sgs;
+
+    public SelIgoodsdetailsService getSgs() {
+        return sgs;
+    }
+
+    public void setSgs(SelIgoodsdetailsService sgs) {
+        this.sgs = sgs;
+    }
+    @ApiOperation(value = "ajax查询分支商品名称")
+    @RequestMapping(value = "/Gooddeatails", method = RequestMethod.POST)
+    @ResponseBody
+    public String name(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "gdstate",required = false)int gdstate ){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        List<Goodsdetails> getgoodsdetails = sgs.getgoodsdetails(gdstate);
+        String s = JSON.toJSONString(getgoodsdetails);
+        return s;
+    }
+}

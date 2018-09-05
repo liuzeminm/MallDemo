@@ -1,0 +1,8 @@
+package cn.service;
+
+import cn.util.Page;
+//显示分支页面信息
+public interface SelPageBranchService {
+    int               selBranchCount(int bstate);
+    Page selBranchClassAndDetails(int bstate, int bindex);
+}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.SearchStoreInformation">
+    <!--商品需要给前台展示的属性公共部分-->
+    <sql id="commodity">
+        comname, compicture, comchoiceness, comspecificationofgoods, comtradedescription,
+    comgetacoupon, comcommodityprices
+    </sql>
+    <!--查询搜索分类信息-->
+    <select id="getAllGoodsclass"  resultType="cn.pojo.Goodsclass">
+        select * from `goodsclass`
+        <where>
+        <if test="_parameter != null">
+            gsname like #{name}
+        </if>
+        </where>
+    </select>
+    <!--查询对应分类下品牌信息-->
+    <select id="getAllClassDetails" parameterType="Integer" resultType="cn.pojo.Goodsdetails">
+        select
+        gdname
+        from `goodsdetails`
+        <where>
+        <if test="_parameter != null">
+            gdstate = #{gdstate}
+        </if>
+        </where>
+    </select>
+    <!--查询对应分类下商品信息-->
+    <select id="getAllClassCommodity" parameterType="int" resultType="cn.pojo.Commodity">
+        select
+        <include refid="commodity"/>
+        from `commodity`
+        <where>
+        <if test="_parameter != null">
+            comclassificationgoods = #{comclassificationgoods}
+        </if>
+        </where>
+    </select>
+    <!--查询搜索结果对应的商品信息-->
+    <select id="getAllCommodity" resultType="cn.pojo.Commodity">
+        select
+        <include refid="commodity"/>
+        from `commodity`
+        <where>
+        <if test="_parameter != null">
+            comname like #{keyword}
+        </if>
+        </where>
+    </select>
+    <!--查询搜索品牌信息-->
+    <select id="getAllGoodsdetails" parameterType="String" resultType="cn.pojo.Goodsdetails">
+        select
+        *
+        from `goodsdetails`
+        <where>
+        <if test="_parameter != null">
+            gdname like #{gdname}
+        </if>
+        </where>
+    </select>
+    <!--查询对应品牌下商品信息-->
+    <select id="getAlldetailsCommodity" parameterType="Integer" resultType="cn.pojo.Commodity">
+        select
+        <include refid="commodity"/>
+        from `commodity`
+        <where>
+        <if test="_parameter != null">
+            combrand = #{combrand}
+        </if>
+        </where>
+    </select>
+    <!--查询商品匹配信息-->
+    <select id="getAllGoodscomments" parameterType="Integer" resultType="cn.pojo.Goodscomments">
+        select
+          gcgoodscomments
+          from `goodscomments`
+          where
+            gccommodityid = #{gccommodityid}
+    </select>
+    <select id="getAllCommodityprices" parameterType="Integer" resultType="cn.pojo.Commodityprices">
+        select
+          cporiginalcost,cptimedspecials,cpmemberprice
+          from `commodityprices`
+          where
+            cpid = #{cpid}
+    </select>
+    <select id="getAllClassificationgoods" parameterType="Integer" resultType="cn.pojo.Classificationgoods">
+        select
+          cgtype
+          from `classificationgoods`
+            where
+              cgid = #{cgid}
+    </select>
+    <select id="getallSourceofcommoditysales" parameterType="Integer" resultType="cn.pojo.Sourceofcommoditysales">
+        select
+          socsscalping,socsbrandshop
+          from `sourceofcommoditysales`
+            where
+              socsmerchant = #{socsmerchant}
+    </select>
+</mapper>

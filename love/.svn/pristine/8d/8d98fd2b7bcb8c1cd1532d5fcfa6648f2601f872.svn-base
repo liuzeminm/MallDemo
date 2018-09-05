@@ -1,0 +1,115 @@
+package cn.pojo;
+
+import java.util.Date;
+
+public class Orderform {
+    private Integer ofid;
+
+    private String ofaddresseename;
+
+    private String ofmodeofpayment;
+
+    private Date ofordertime;
+
+    private String ofordernumber;
+
+    private String ofordertoevaluate;
+
+    private String oforder;
+
+    private Integer ofshippinginformation;
+
+    private Double oforderprice;
+
+    private Integer ofstate;
+
+    private Integer ofcdid;
+
+    public Integer getOfid() {
+        return ofid;
+    }
+
+    public void setOfid(Integer ofid) {
+        this.ofid = ofid;
+    }
+
+    public String getOfaddresseename() {
+        return ofaddresseename;
+    }
+
+    public void setOfaddresseename(String ofaddresseename) {
+        this.ofaddresseename = ofaddresseename == null ? null : ofaddresseename.trim();
+    }
+
+    public String getOfmodeofpayment() {
+        return ofmodeofpayment;
+    }
+
+    public void setOfmodeofpayment(String ofmodeofpayment) {
+        this.ofmodeofpayment = ofmodeofpayment == null ? null : ofmodeofpayment.trim();
+    }
+
+    public Date getOfordertime() {
+        return ofordertime;
+    }
+
+    public void setOfordertime(Date ofordertime) {
+        this.ofordertime = ofordertime;
+    }
+
+    public String getOfordernumber() {
+        return ofordernumber;
+    }
+
+    public void setOfordernumber(String ofordernumber) {
+        this.ofordernumber = ofordernumber == null ? null : ofordernumber.trim();
+    }
+
+    public String getOfordertoevaluate() {
+        return ofordertoevaluate;
+    }
+
+    public void setOfordertoevaluate(String ofordertoevaluate) {
+        this.ofordertoevaluate = ofordertoevaluate == null ? null : ofordertoevaluate.trim();
+    }
+
+    public String getOforder() {
+        return oforder;
+    }
+
+    public void setOforder(String oforder) {
+        this.oforder = oforder == null ? null : oforder.trim();
+    }
+
+    public Integer getOfshippinginformation() {
+        return ofshippinginformation;
+    }
+
+    public void setOfshippinginformation(Integer ofshippinginformation) {
+        this.ofshippinginformation = ofshippinginformation;
+    }
+
+    public Double getOforderprice() {
+        return oforderprice;
+    }
+
+    public void setOforderprice(Double oforderprice) {
+        this.oforderprice = oforderprice;
+    }
+
+    public Integer getOfstate() {
+        return ofstate;
+    }
+
+    public void setOfstate(Integer ofstate) {
+        this.ofstate = ofstate;
+    }
+
+    public Integer getOfcdid() {
+        return ofcdid;
+    }
+
+    public void setOfcdid(Integer ofcdid) {
+        this.ofcdid = ofcdid;
+    }
+}

@@ -1,0 +1,34 @@
+package cn.dao;
+
+import cn.pojo.Goodsdetails;
+import cn.pojo.GoodsdetailsExample;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface IGoodsdetailsDao {
+    //查询分支名字
+    List<Goodsdetails>    getgoodsdetails(@Param("gs") int gs);
+
+    int countByExample(GoodsdetailsExample example);
+
+    int deleteByExample(GoodsdetailsExample example);
+
+    int deleteByPrimaryKey(Integer gdid);
+
+    int insert(Goodsdetails record);
+
+    int insertSelective(Goodsdetails record);
+
+    List<Goodsdetails> selectByExample(GoodsdetailsExample example);
+
+    Goodsdetails selectByPrimaryKey(Integer gdid);
+
+    int updateByExampleSelective(@Param("record") Goodsdetails record, @Param("example") GoodsdetailsExample example);
+
+    int updateByExample(@Param("record") Goodsdetails record, @Param("example") GoodsdetailsExample example);
+
+    int updateByPrimaryKeySelective(Goodsdetails record);
+
+    int updateByPrimaryKey(Goodsdetails record);
+}

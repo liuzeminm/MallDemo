@@ -1,0 +1,48 @@
+package cn.controller;
+
+import cn.service.SelPageBranchService;
+
+import cn.util.Page;
+import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@Api(tags = "商城分支显示页面")
+@RestController
+@RequestMapping
+public class PageBranchController {
+    @Resource(name = "sbs")
+    private SelPageBranchService ss;
+
+    public SelPageBranchService getSs() {
+        return ss;
+    }
+
+    public void setSs(SelPageBranchService ss) {
+        this.ss = ss;
+    }
+
+    @ApiOperation(value = "计算分支条数", notes = "计算所选分支条数")
+    @RequestMapping(value = "/BranchPagecount", method = RequestMethod.POST)
+    @ResponseBody
+    public int  count(@RequestParam(value = "state",required = false)int state ){
+        int i = ss.selBranchCount(state);
+        return i;
+    }
+
+    @ApiOperation(value = "显示商城分支页面数据", notes = "显示商城分支页面图面信息")
+    @RequestMapping(value = "/BranchPage", method = RequestMethod.POST)
+    @ResponseBody
+    public String filialeList(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "state", required = false)int state, @RequestParam(value = "index",required = false)int index  ){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        Page page = ss.selBranchClassAndDetails(state, index);
+        String s = JSON.toJSONString(page);
+        return   s;
+    }
+
+}

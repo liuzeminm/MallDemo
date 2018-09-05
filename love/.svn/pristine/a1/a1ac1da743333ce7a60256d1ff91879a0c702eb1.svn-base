@@ -1,0 +1,129 @@
+package cn.service.impl;
+
+import cn.dao.SearchStoreInformation;
+import cn.pojo.Commodity;
+import cn.pojo.Goodsclass;
+import cn.pojo.Goodsdetails;
+import cn.service.*;
+import com.alibaba.fastjson.JSON;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+@Service("sss")
+public class SearchServiceImpl implements SearchService{
+    @Resource(name = "SearchStoreInformation")
+    private SearchStoreInformation ss;
+
+    public SearchStoreInformation getSs() {
+        return ss;
+    }
+
+    public void setSs(SearchStoreInformation ss) {
+        this.ss = ss;
+    }
+    @Resource(name = "sr")
+    private SearchResult sr;
+
+    public SearchResult getSr() {
+        return sr;
+    }
+    @Resource(name = "gags")
+    private GetAllGoodclassService gags;
+    @Resource(name = "gad")
+    private GetAllGooddetailsService gad;
+    @Resource(name = "gacs")
+    private GetAllCommodityService gacs;
+
+    public GetAllGoodclassService getGags() {
+        return gags;
+    }
+
+    public void setGags(GetAllGoodclassService gags) {
+        this.gags = gags;
+    }
+
+    public GetAllGooddetailsService getGad() {
+        return gad;
+    }
+
+    public void setGad(GetAllGooddetailsService gad) {
+        this.gad = gad;
+    }
+
+    public GetAllCommodityService getGacs() {
+        return gacs;
+    }
+
+    public void setGacs(GetAllCommodityService gacs) {
+        this.gacs = gacs;
+    }
+    public void setSr(SearchResult sr) {
+        this.sr = sr;
+    }
+
+
+    public List getAll(String name) {
+        int result = sr.result(name);
+        List listAll = new ArrayList();
+        List<Goodsclass> classes = new ArrayList<Goodsclass>();
+        List<Goodsdetails> details = new ArrayList<Goodsdetails>();
+        List<Commodity> commodities = new ArrayList<Commodity>();
+        long start = System.currentTimeMillis();
+        long time = 0;
+        String times = null;
+        switch (result) {
+            case 1:
+                // 获取搜索结果对应的类
+                classes = gags.getAllGoodClass(name);
+                // 获取搜索结果对应分类下品牌信息
+                for (Goodsclass gc : classes) {
+                    details = ss.getAllClassDetails(gc.getGsclassid());
+                }
+                // 获取搜索结果对应类下对应品牌对应商品
+                for (Goodsdetails gd : details) {
+                    commodities = ss.getAllClassCommodity(gd.getGdid());
+                }
+                time = System.currentTimeMillis() - start;
+                times = "查询用时" + time +"ms";
+                listAll.add(0,times);
+                listAll.add(1,classes);
+                listAll.add(2,details);
+                listAll.add(3,commodities);
+                break;
+            case 2:
+                details = gad.getAllGooddetails(name);
+                // 获取搜索结果对应品牌对应商品
+                for (Goodsdetails gd : details) {
+                    commodities = ss.getAlldetailsCommodity(gd.getGdid());
+                }
+                time = System.currentTimeMillis() - start;
+                times = "查询用时" + time + "ms";
+                listAll.add(0,times);
+                listAll.add(1,"无分类查询结果");
+                listAll.add(2,details);
+                listAll.add(3,commodities);
+                break;
+            case 3:
+                commodities = gacs.getAllCommdity(name);
+                time = System.currentTimeMillis() - start;
+                times = "查询用时" + time + "ms";
+                listAll.add(0,times);
+                listAll.add(1,"无分类查询结果");
+                listAll.add(2,"无分类结果");
+                listAll.add(3,commodities);
+                break;
+            case 0:
+                time = System.currentTimeMillis() - start;
+                times = "查询用时" + time + "ms";
+                listAll.add(0,times);
+                listAll.add(1,"查询结果为空");
+                break;
+        }
+
+        return listAll;
+    }
+}

@@ -1,0 +1,27 @@
+package cn.test;
+
+import cn.pojo.Notenote;
+import cn.service.Colldelservice;
+import cn.service.Collectionservice;
+import cn.service.Colllookservice;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Test {
+    public static void main(String[] args) {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext-mybatis.xml");
+//        Collectionservice csi = (Collectionservice) ac.getBean("csi");
+//        Notenote nn = new Notenote();
+//        nn.setNcusernameid(3);
+//        nn.setNccollectionid(3);
+//        String s = csi.insertSelective(nn);
+//        System.out.println(s);
+//        Colldelservice cds = (Colldelservice) ac.getBean("cds");
+//        String updatadel = cds.updatadel(1);
+//        System.out.println(updatadel);
+        Colllookservice csi = (Colllookservice) ac.getBean("clsi");
+        String selective = csi.Selective(1);
+        System.out.println(selective);
+
+    }
+}

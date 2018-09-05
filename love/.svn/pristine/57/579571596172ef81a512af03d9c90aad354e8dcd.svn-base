@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.IAttentionDao" >
+  <resultMap id="BaseResultMap" type="cn.pojo.Attention" >
+    <id column="attentionid" property="attentionid" jdbcType="INTEGER" />
+    <result column="attentionbefocused" property="attentionbefocused" jdbcType="INTEGER" />
+    <result column="attentionuser" property="attentionuser" jdbcType="INTEGER" />
+    <result column="attentiontype" property="attentiontype" jdbcType="INTEGER" />
+    <result column="attentionlabel" property="attentionlabel" jdbcType="VARCHAR" />
+    <result column="attentionalbum" property="attentionalbum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    attentionid, attentionbefocused, attentionuser, attentiontype, attentionlabel, attentionalbum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.pojo.AttentionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from attention
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from attention
+    where attentionid = #{attentionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from attention
+    where attentionid = #{attentionid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.pojo.AttentionExample" >
+    delete from attention
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.pojo.Attention" >
+    insert into attention (attentionid, attentionbefocused, 
+      attentionuser, attentiontype, attentionlabel, 
+      attentionalbum)
+    values (#{attentionid,jdbcType=INTEGER}, #{attentionbefocused,jdbcType=INTEGER}, 
+      #{attentionuser,jdbcType=INTEGER}, #{attentiontype,jdbcType=INTEGER}, #{attentionlabel,jdbcType=VARCHAR}, 
+      #{attentionalbum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.pojo.Attention" >
+    insert into attention
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attentionid != null" >
+        attentionid,
+      </if>
+      <if test="attentionbefocused != null" >
+        attentionbefocused,
+      </if>
+      <if test="attentionuser != null" >
+        attentionuser,
+      </if>
+      <if test="attentiontype != null" >
+        attentiontype,
+      </if>
+      <if test="attentionlabel != null" >
+        attentionlabel,
+      </if>
+      <if test="attentionalbum != null" >
+        attentionalbum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attentionid != null" >
+        #{attentionid,jdbcType=INTEGER},
+      </if>
+      <if test="attentionbefocused != null" >
+        #{attentionbefocused,jdbcType=INTEGER},
+      </if>
+      <if test="attentionuser != null" >
+        #{attentionuser,jdbcType=INTEGER},
+      </if>
+      <if test="attentiontype != null" >
+        #{attentiontype,jdbcType=INTEGER},
+      </if>
+      <if test="attentionlabel != null" >
+        #{attentionlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="attentionalbum != null" >
+        #{attentionalbum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.pojo.AttentionExample" resultType="java.lang.Integer" >
+    select count(*) from attention
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update attention
+    <set >
+      <if test="record.attentionid != null" >
+        attentionid = #{record.attentionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.attentionbefocused != null" >
+        attentionbefocused = #{record.attentionbefocused,jdbcType=INTEGER},
+      </if>
+      <if test="record.attentionuser != null" >
+        attentionuser = #{record.attentionuser,jdbcType=INTEGER},
+      </if>
+      <if test="record.attentiontype != null" >
+        attentiontype = #{record.attentiontype,jdbcType=INTEGER},
+      </if>
+      <if test="record.attentionlabel != null" >
+        attentionlabel = #{record.attentionlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attentionalbum != null" >
+        attentionalbum = #{record.attentionalbum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update attention
+    set attentionid = #{record.attentionid,jdbcType=INTEGER},
+      attentionbefocused = #{record.attentionbefocused,jdbcType=INTEGER},
+      attentionuser = #{record.attentionuser,jdbcType=INTEGER},
+      attentiontype = #{record.attentiontype,jdbcType=INTEGER},
+      attentionlabel = #{record.attentionlabel,jdbcType=VARCHAR},
+      attentionalbum = #{record.attentionalbum,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.pojo.Attention" >
+    update attention
+    <set >
+      <if test="attentionbefocused != null" >
+        attentionbefocused = #{attentionbefocused,jdbcType=INTEGER},
+      </if>
+      <if test="attentionuser != null" >
+        attentionuser = #{attentionuser,jdbcType=INTEGER},
+      </if>
+      <if test="attentiontype != null" >
+        attentiontype = #{attentiontype,jdbcType=INTEGER},
+      </if>
+      <if test="attentionlabel != null" >
+        attentionlabel = #{attentionlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="attentionalbum != null" >
+        attentionalbum = #{attentionalbum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where attentionid = #{attentionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.pojo.Attention" >
+    update attention
+    set attentionbefocused = #{attentionbefocused,jdbcType=INTEGER},
+      attentionuser = #{attentionuser,jdbcType=INTEGER},
+      attentiontype = #{attentiontype,jdbcType=INTEGER},
+      attentionlabel = #{attentionlabel,jdbcType=VARCHAR},
+      attentionalbum = #{attentionalbum,jdbcType=VARCHAR}
+    where attentionid = #{attentionid,jdbcType=INTEGER}
+  </update>
+</mapper>

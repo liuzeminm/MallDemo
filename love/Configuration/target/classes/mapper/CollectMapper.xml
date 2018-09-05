@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.ICollectDao" >
+  <resultMap id="BaseResultMap" type="cn.pojo.Collect" >
+    <id column="collectid" property="collectid" jdbcType="INTEGER" />
+    <result column="collectmyalbum" property="collectmyalbum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    collectid, collectmyalbum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.pojo.CollectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from collect
+    where collectid = #{collectid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from collect
+    where collectid = #{collectid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.pojo.CollectExample" >
+    delete from collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.pojo.Collect" >
+    insert into collect (collectid, collectmyalbum)
+    values (#{collectid,jdbcType=INTEGER}, #{collectmyalbum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.pojo.Collect" >
+    insert into collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectid != null" >
+        collectid,
+      </if>
+      <if test="collectmyalbum != null" >
+        collectmyalbum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectid != null" >
+        #{collectid,jdbcType=INTEGER},
+      </if>
+      <if test="collectmyalbum != null" >
+        #{collectmyalbum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.pojo.CollectExample" resultType="java.lang.Integer" >
+    select count(*) from collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update collect
+    <set >
+      <if test="record.collectid != null" >
+        collectid = #{record.collectid,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectmyalbum != null" >
+        collectmyalbum = #{record.collectmyalbum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update collect
+    set collectid = #{record.collectid,jdbcType=INTEGER},
+      collectmyalbum = #{record.collectmyalbum,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.pojo.Collect" >
+    update collect
+    <set >
+      <if test="collectmyalbum != null" >
+        collectmyalbum = #{collectmyalbum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where collectid = #{collectid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.pojo.Collect" >
+    update collect
+    set collectmyalbum = #{collectmyalbum,jdbcType=VARCHAR}
+    where collectid = #{collectid,jdbcType=INTEGER}
+  </update>
+</mapper>

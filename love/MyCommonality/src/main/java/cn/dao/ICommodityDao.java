@@ -1,0 +1,54 @@
+package cn.dao;
+
+import cn.pojo.Commodity;
+import cn.pojo.CommodityExample;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface ICommodityDao {
+
+    //增加信息
+    int insertPiceter(@Param(value = "cd") Commodity cd);
+
+    //查主页几条信息
+    int   selCount(@Param("state") int state);
+
+    //分页查主页信息
+    List<Commodity>  selDetails (@Param("state") int  state,@Param("index") int index, @Param("page")int pagesize);
+
+    //查个人信息
+    Commodity       selPinformation(@Param("informationid") int informationid);
+
+    //查分支几条信息
+    int   selBranchCount(@Param("bstate") int Bstate);
+
+    //分页查更多里的分支信息
+    List<Commodity>  selBranchDetails (@Param("bstate") int  Bstate,@Param("bindex") int Bindex, @Param("bpagesize")int bpagesize);
+
+    int countByExample(CommodityExample example);
+
+    int deleteByExample(CommodityExample example);
+
+    int deleteByPrimaryKey(Integer comid);
+
+    int insert(Commodity record);
+
+    int insertSelective(Commodity record);
+
+    List<Commodity> selectByExample(CommodityExample example);
+
+    Commodity selectByPrimaryKey(Integer comid);
+
+    int updateByExampleSelective(@Param("record") Commodity record, @Param("example") CommodityExample example);
+
+    int updateByExample(@Param("record") Commodity record, @Param("example") CommodityExample example);
+
+    int updateByPrimaryKeySelective(Integer i);
+
+    int updateByPrimaryKey(Integer i , Integer id);
+
+
+
+    Commodity getOf(int comid);
+}

@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.IShoppingtrolleyDao" >
+  <resultMap id="BaseResultMap" type="cn.pojo.Shoppingtrolley" >
+    <id column="stid" property="stid" jdbcType="INTEGER" />
+    <result column="stname" property="stname" jdbcType="VARCHAR" />
+    <result column="stnameofshop" property="stnameofshop" jdbcType="VARCHAR" />
+    <result column="stcommodityprices" property="stcommodityprices" jdbcType="DOUBLE" />
+    <result column="stquantityofcommodity" property="stquantityofcommodity" jdbcType="INTEGER" />
+    <result column="stcommodityimages" property="stcommodityimages" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stid, stname, stnameofshop, stcommodityprices, stquantityofcommodity, stcommodityimages
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.pojo.ShoppingtrolleyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shoppingtrolley
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from shoppingtrolley
+    where stid = #{stid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shoppingtrolley where stuserid = #{stuserid}
+  </delete>
+  <delete id="deleteByPrimaryKeyone"  >
+    delete from shoppingtrolley where stuserid = #{0} and stname = #{1}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.pojo.ShoppingtrolleyExample" >
+    delete from
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.pojo.Shoppingtrolley" >
+    insert into shoppingtrolley (stid, stname, stnameofshop,
+      stcommodityprices, stquantityofcommodity,
+      stcommodityimages)
+    values (#{stid,jdbcType=INTEGER}, #{stname,jdbcType=VARCHAR}, #{stnameofshop,jdbcType=VARCHAR},
+      #{stcommodityprices,jdbcType=DOUBLE}, #{stquantityofcommodity,jdbcType=INTEGER},
+      #{stcommodityimages,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.pojo.Shoppingtrolley" >
+    insert into shoppingtrolley
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stid != null" >
+        stid,
+      </if>
+      <if test="stname != null" >
+        stname,
+      </if>
+      <if test="stnameofshop != null" >
+        stnameofshop,
+      </if>
+      <if test="stcommodityprices != null" >
+        stcommodityprices,
+      </if>
+      <if test="stquantityofcommodity != null" >
+        stquantityofcommodity,
+      </if>
+      <if test="stcommodityimages != null" >
+        stcommodityimages,
+      </if>
+      <if test="stuserid != null" >
+        stuserid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stid != null" >
+        #{stid,jdbcType=INTEGER},
+      </if>
+      <if test="stname != null" >
+        #{stname,jdbcType=VARCHAR},
+      </if>
+      <if test="stnameofshop != null" >
+        #{stnameofshop,jdbcType=VARCHAR},
+      </if>
+      <if test="stcommodityprices != null" >
+        #{stcommodityprices,jdbcType=DOUBLE},
+      </if>
+      <if test="stquantityofcommodity != null" >
+        #{stquantityofcommodity,jdbcType=INTEGER},
+      </if>
+      <if test="stcommodityimages != null" >
+        #{stcommodityimages,jdbcType=VARCHAR},
+      </if>
+      <if test="stuserid != null" >
+        #{stuserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.pojo.ShoppingtrolleyExample" resultType="java.lang.Integer" >
+    select count(*) from shoppingtrolley
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shoppingtrolley
+    <set >
+      <if test="record.stid != null" >
+        stid = #{record.stid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stname != null" >
+        stname = #{record.stname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stnameofshop != null" >
+        stnameofshop = #{record.stnameofshop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stcommodityprices != null" >
+        stcommodityprices = #{record.stcommodityprices,jdbcType=DOUBLE},
+      </if>
+      <if test="record.stquantityofcommodity != null" >
+        stquantityofcommodity = #{record.stquantityofcommodity,jdbcType=INTEGER},
+      </if>
+      <if test="record.stcommodityimages != null" >
+        stcommodityimages = #{record.stcommodityimages,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shoppingtrolley
+    set stid = #{record.stid,jdbcType=INTEGER},
+      stname = #{record.stname,jdbcType=VARCHAR},
+      stnameofshop = #{record.stnameofshop,jdbcType=VARCHAR},
+      stcommodityprices = #{record.stcommodityprices,jdbcType=DOUBLE},
+      stquantityofcommodity = #{record.stquantityofcommodity,jdbcType=INTEGER},
+      stcommodityimages = #{record.stcommodityimages,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.pojo.Shoppingtrolley" >
+    update shoppingtrolley
+    <set >
+      <if test="stname != null" >
+        stname = #{stname,jdbcType=VARCHAR},
+      </if>
+      <if test="stnameofshop != null" >
+        stnameofshop = #{stnameofshop,jdbcType=VARCHAR},
+      </if>
+      <if test="stcommodityprices != null" >
+        stcommodityprices = #{stcommodityprices,jdbcType=DOUBLE},
+      </if>
+      <if test="stquantityofcommodity != null" >
+        stquantityofcommodity = #{stquantityofcommodity,jdbcType=INTEGER},
+      </if>
+      <if test="stcommodityimages != null" >
+        stcommodityimages = #{stcommodityimages,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stid = #{stid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.pojo.Shoppingtrolley" >
+    update shoppingtrolley
+    set stname = #{stname,jdbcType=VARCHAR},
+      stnameofshop = #{stnameofshop,jdbcType=VARCHAR},
+      stcommodityprices = #{stcommodityprices,jdbcType=DOUBLE},
+      stquantityofcommodity = #{stquantityofcommodity,jdbcType=INTEGER},
+      stcommodityimages = #{stcommodityimages,jdbcType=VARCHAR}
+    where stid = #{stid,jdbcType=INTEGER}
+  </update>
+  <!--添加购物车-->
+  <insert id="inserttrolley" parameterType="Shoppingtrolley">
+        insert into shoppingtrolley(stid,stname,stnameofshop,stcommodityprices,stquantityofcommodity,stcommodityimages,stuserid,ststate,stcomid) values (#{sr.stid},#{sr.stname},#{sr.stnameofshop},#{sr.stcommodityprices},#{sr.stquantityofcommodity},#{sr.stcommodityimages},#{sr.stuserid},#{sr.ststate},#{sr.stcomid})
+  </insert>
+  <!--是否同一件商品-->
+  <select id="equality" parameterType="int" resultType="int">
+        select count(2) from shoppingtrolley where stcomid = #{cid} and ststate=1
+  </select>
+  <!--购物车数量加一-->
+  <update id="quantity">
+        update shoppingtrolley set stquantityofcommodity= #{0}+1 where stcomid = #{1}
+  </update>
+  <!--商品数量-->
+  <select id="count" parameterType="int" resultType="int">
+        select stquantityofcommodity from shoppingtrolley where stcomid = #{id}
+  </select>
+  <!--展示购物车-->
+  <select id="shoppingshow" resultType="Shoppingtrolley" parameterType="int">
+        select stname,stcommodityprices,stquantityofcommodity,stcommodityimages from shoppingtrolley where ststate = 1 and stuserid = #{uid}
+  </select>
+  <update id="delshopAll" parameterType="int">
+        update shoppingtrolley set ststate = 0 where stuserid=#{userid}
+  </update>
+  <update id="delshopping" parameterType="int">
+        update shoppingtrolley set ststate = 0 where stcomid = #{0} and stuserid = #{1}
+  </update>
+</mapper>

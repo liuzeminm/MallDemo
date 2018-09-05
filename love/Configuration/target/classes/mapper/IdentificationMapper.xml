@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.IIdentificationDao" >
+  <resultMap id="BaseResultMap" type="cn.pojo.Identification" >
+    <id column="ifid" property="ifid" jdbcType="INTEGER" />
+    <result column="ifdomesticconsumer" property="ifdomesticconsumer" jdbcType="VARCHAR" />
+    <result column="ifmember" property="ifmember" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ifid, ifdomesticconsumer, ifmember
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.pojo.IdentificationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from identification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from identification
+    where ifid = #{ifid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from identification
+    where ifid = #{ifid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.pojo.IdentificationExample" >
+    delete from identification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.pojo.Identification" >
+    insert into identification (ifid, ifdomesticconsumer, ifmember
+      )
+    values (#{ifid,jdbcType=INTEGER}, #{ifdomesticconsumer,jdbcType=VARCHAR}, #{ifmember,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.pojo.Identification" >
+    insert into identification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ifid != null" >
+        ifid,
+      </if>
+      <if test="ifdomesticconsumer != null" >
+        ifdomesticconsumer,
+      </if>
+      <if test="ifmember != null" >
+        ifmember,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ifid != null" >
+        #{ifid,jdbcType=INTEGER},
+      </if>
+      <if test="ifdomesticconsumer != null" >
+        #{ifdomesticconsumer,jdbcType=VARCHAR},
+      </if>
+      <if test="ifmember != null" >
+        #{ifmember,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.pojo.IdentificationExample" resultType="java.lang.Integer" >
+    select count(*) from identification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update identification
+    <set >
+      <if test="record.ifid != null" >
+        ifid = #{record.ifid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ifdomesticconsumer != null" >
+        ifdomesticconsumer = #{record.ifdomesticconsumer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifmember != null" >
+        ifmember = #{record.ifmember,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update identification
+    set ifid = #{record.ifid,jdbcType=INTEGER},
+      ifdomesticconsumer = #{record.ifdomesticconsumer,jdbcType=VARCHAR},
+      ifmember = #{record.ifmember,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.pojo.Identification" >
+    update identification
+    <set >
+      <if test="ifdomesticconsumer != null" >
+        ifdomesticconsumer = #{ifdomesticconsumer,jdbcType=VARCHAR},
+      </if>
+      <if test="ifmember != null" >
+        ifmember = #{ifmember,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ifid = #{ifid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.pojo.Identification" >
+    update identification
+    set ifdomesticconsumer = #{ifdomesticconsumer,jdbcType=VARCHAR},
+      ifmember = #{ifmember,jdbcType=VARCHAR}
+    where ifid = #{ifid,jdbcType=INTEGER}
+  </update>
+</mapper>

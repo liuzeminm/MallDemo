@@ -1,0 +1,175 @@
+package cn.controller;
+
+import cn.pojo.Useri;
+import cn.setservice.UpdVerService;
+import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+
+@RestController
+@RequestMapping("/Update")
+public class Updateinf {
+
+    @Resource(name="ver")
+    private UpdVerService us;
+
+    public UpdVerService getUs() { return us; }
+    public void setUs(UpdVerService us) { this.us = us; }
+
+    /**
+     * 修改用户名
+     */
+    @ApiOperation(value = "修改用户名 - 接口", notes = "根据已登录用户的ID")
+    @RequestMapping(value = "Updateusername",method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    public Object Updateusername(@ApiParam(name = "id",value = "用户ID",required=true) @RequestParam int id,
+                                 @ApiParam(name = "name",value = "用户姓名",required=true) @RequestParam String name,
+                                         HttpServletResponse response, HttpServletRequest request ){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        String uname = "";
+        String t="name";
+
+        try {
+            uname = new String(name.getBytes("ISO-8859-1"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println(id+uname);
+        Useri u = new Useri();
+        u.setUserid(id);
+        u.setUsername(uname);
+        Object rs = us.verify(u,t);
+        Object ret = JSON.toJSONString(rs);
+        return rs;
+    }
+
+    /**
+     * 修改性别
+     */
+    @ApiOperation(value = "修改性别 - 接口", notes = "根据已登录用户的ID")
+    @RequestMapping(value = "Updateusersex",method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    public Object Updateusersex(@ApiParam(name = "id",value = "用户ID",required=true) @RequestParam int id,
+                                     @ApiParam(name = "sex",value = "用户性别",required=true) @RequestParam String sex,
+                                HttpServletResponse response, HttpServletRequest request ){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        String usex = "";
+        String t="sex";
+        try {
+            usex = new String(sex.getBytes("ISO-8859-1"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println(id+usex);
+        Useri u = new Useri();
+        u.setUserid(id);
+        u.setUsersex(usex);
+        Object rs = us.verify(u,t);
+        Object ret = JSON.toJSONString(rs);
+        return ret;
+    }
+
+    /**
+     * 修改常住地
+     */
+    @ApiOperation(value = "修改常住地 - 接口", notes = "根据已登录用户的ID")
+    @RequestMapping(value = "Updateuseroftensite",method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    public Object Updateuseroftensite(@ApiParam(name = "id",value = "用户ID",required=true) @RequestParam int id,
+                                @ApiParam(name = "oftensite",value = "用户常住地",required=true) @RequestParam String oftensite,
+                                      HttpServletResponse response, HttpServletRequest request ){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        String usite = "";
+        String t="site";
+        try {
+            usite = new String(oftensite.getBytes("ISO-8859-1"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println(id+usite);
+        Useri u = new Useri();
+        u.setUserid(id);
+        u.setUseroftensite(usite);
+        Object rs = us.verify(u,t);
+        Object ret = JSON.toJSONString(rs);
+        return ret;
+    }
+
+    /**
+     * 修改生日
+     */
+    @ApiOperation(value = "修改生日 - 接口", notes = "根据已登录用户的ID")
+    @RequestMapping(value = "Updateuserbrithdate",method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    public Object Updateuserbrithdate(@ApiParam(name = "id",value = "用户ID",required=true) @RequestParam int id,
+                                      @ApiParam(name = "brithdate",value = "用户生日",required=true) @RequestParam String brithdate,
+                                      HttpServletResponse response, HttpServletRequest request ){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        String ubrith = "";
+        String t="briday";
+        try {
+            ubrith = new String(brithdate.getBytes("ISO-8859-1"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println(id+ubrith);
+        Useri u = new Useri();
+        u.setUserid(id);
+        u.setUserdatebirth(ubrith);
+        Object rs = us.verify(u,t);
+        Object ret = JSON.toJSONString(rs);
+        return ret;
+    }
+
+    /**
+     * 修改手机号
+     */
+    @ApiOperation(value = "修改手机号 - 接口", notes = "根据已登录的用户ID进行修改")
+    @RequestMapping(value = "UpdateuserPhonenumber",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
+    public Object UpdateuserPhonenumber(@ApiParam(name = "id",value = "用户ID",required=true) @RequestParam int id,
+                                      @ApiParam(name = "Phonenumber",value = "用户手机号",required=true) @RequestParam String Phonenumber,
+                                        HttpServletResponse response, HttpServletRequest request ){
+        response.setHeader("Access-Control-Allow-Origin","*");
+
+        String upm = "";
+        String t="phone";
+        try {
+            upm = new String(Phonenumber.getBytes("ISO-8859-1"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println(id+upm);
+        Useri u = new Useri();
+        u.setUserid(id);
+        u.setUserphone(upm);
+        Object rs = us.verify(u,t);
+        Object ret = JSON.toJSONString(rs);
+        return ret;
+    }
+    /**
+     * 修改登录密码
+     */
+    @ApiOperation(value = "修改登录密码 - 接口", notes = "根据已登录的用户ID进行修改")
+    @RequestMapping(value = "Updateuserloginpassword",method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    public Object Updateuserloginpassword(@ApiParam(name = "id",value = "用户ID",required=true) @RequestParam int id,
+                                        @ApiParam(name = "password",value = "用户登录密码",required=true) @RequestParam String password,
+                                          HttpServletResponse response, HttpServletRequest request ){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        String pwd = "";
+        String t="pwd";
+        try {
+            pwd = new String(password.getBytes("ISO-8859-1"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println(id+pwd);
+        Useri u = new Useri();
+        u.setUserid(id);
+        u.setUserloginpassword(pwd);
+        Object rs = us.verify(u,t);
+        Object ret = JSON.toJSONString(rs);
+        return ret;
+    }
+}

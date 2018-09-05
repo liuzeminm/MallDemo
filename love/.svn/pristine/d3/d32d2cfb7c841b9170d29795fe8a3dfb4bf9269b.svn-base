@@ -1,0 +1,39 @@
+package cn.dao;
+
+import cn.pojo.Useri;
+import cn.pojo.UseriExample;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface IUseriDao {
+    int countByExample(UseriExample example);
+
+    int deleteByExample(UseriExample example);
+
+    int deleteByPrimaryKey(Integer userid);
+
+    int insert(Useri record);
+
+    int insertSelective(Useri record);
+
+    List<Useri> selectByExample(UseriExample example);
+
+    Useri selectByPrimaryKey(String userphone, String userloginpassword);
+
+    Useri selectByPrimaryKeyone(String userphone);
+
+    int updateByExampleSelective(@Param("record") Useri record, @Param("example") UseriExample example);
+
+    int updateByExample(@Param("record") Useri record, @Param("example") UseriExample example);
+
+    int updateByPrimaryKeySelective(Useri record);
+
+    int updateByPrimaryKey(Useri record);
+
+    int updateuser(Useri u);
+
+    Useri VerifySel(Useri u);
+
+    int updatepwd(String userloginpassword , int userid);
+}

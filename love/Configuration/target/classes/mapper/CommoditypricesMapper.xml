@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.ICommoditypricesDao" >
+  <resultMap id="BaseResultMap" type="cn.pojo.Commodityprices" >
+    <id column="cpid" property="cpid" jdbcType="INTEGER" />
+    <result column="cporiginalcost" property="cporiginalcost" jdbcType="DOUBLE" />
+    <result column="cptimedspecials" property="cptimedspecials" jdbcType="DOUBLE" />
+    <result column="cpmemberprice" property="cpmemberprice" jdbcType="DOUBLE" />
+    <result column="cptax" property="cptax" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cpid, cporiginalcost, cptimedspecials, cpmemberprice, cptax
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.pojo.CommoditypricesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from commodityprices
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodityprices
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commodityprices
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.pojo.CommoditypricesExample" >
+    delete from commodityprices
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.pojo.Commodityprices" >
+    insert into commodityprices (cpid, cporiginalcost, cptimedspecials, 
+      cpmemberprice, cptax)
+    values (#{cpid,jdbcType=INTEGER}, #{cporiginalcost,jdbcType=DOUBLE}, #{cptimedspecials,jdbcType=DOUBLE}, 
+      #{cpmemberprice,jdbcType=DOUBLE}, #{cptax,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.pojo.Commodityprices" >
+    insert into commodityprices
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cpid != null" >
+        cpid,
+      </if>
+      <if test="cporiginalcost != null" >
+        cporiginalcost,
+      </if>
+      <if test="cptimedspecials != null" >
+        cptimedspecials,
+      </if>
+      <if test="cpmemberprice != null" >
+        cpmemberprice,
+      </if>
+      <if test="cptax != null" >
+        cptax,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cpid != null" >
+        #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="cporiginalcost != null" >
+        #{cporiginalcost,jdbcType=DOUBLE},
+      </if>
+      <if test="cptimedspecials != null" >
+        #{cptimedspecials,jdbcType=DOUBLE},
+      </if>
+      <if test="cpmemberprice != null" >
+        #{cpmemberprice,jdbcType=DOUBLE},
+      </if>
+      <if test="cptax != null" >
+        #{cptax,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.pojo.CommoditypricesExample" resultType="java.lang.Integer" >
+    select count(*) from commodityprices
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update commodityprices
+    <set >
+      <if test="record.cpid != null" >
+        cpid = #{record.cpid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cporiginalcost != null" >
+        cporiginalcost = #{record.cporiginalcost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cptimedspecials != null" >
+        cptimedspecials = #{record.cptimedspecials,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cpmemberprice != null" >
+        cpmemberprice = #{record.cpmemberprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cptax != null" >
+        cptax = #{record.cptax,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update commodityprices
+    set cpid = #{record.cpid,jdbcType=INTEGER},
+      cporiginalcost = #{record.cporiginalcost,jdbcType=DOUBLE},
+      cptimedspecials = #{record.cptimedspecials,jdbcType=DOUBLE},
+      cpmemberprice = #{record.cpmemberprice,jdbcType=DOUBLE},
+      cptax = #{record.cptax,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.pojo.Commodityprices" >
+    update commodityprices
+    <set >
+      <if test="cporiginalcost != null" >
+        cporiginalcost = #{cporiginalcost,jdbcType=DOUBLE},
+      </if>
+      <if test="cptimedspecials != null" >
+        cptimedspecials = #{cptimedspecials,jdbcType=DOUBLE},
+      </if>
+      <if test="cpmemberprice != null" >
+        cpmemberprice = #{cpmemberprice,jdbcType=DOUBLE},
+      </if>
+      <if test="cptax != null" >
+        cptax = #{cptax,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.pojo.Commodityprices" >
+    update commodityprices
+    set cporiginalcost = #{cporiginalcost,jdbcType=DOUBLE},
+      cptimedspecials = #{cptimedspecials,jdbcType=DOUBLE},
+      cpmemberprice = #{cpmemberprice,jdbcType=DOUBLE},
+      cptax = #{cptax,jdbcType=DOUBLE}
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </update>
+</mapper>

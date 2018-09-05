@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.IGoodsdetailsDao" >
+  <resultMap id="BaseResultMap" type="cn.pojo.Goodsdetails" >
+    <id column="gdid" property="gdid" jdbcType="INTEGER" />
+    <result column="gdstate" property="gdstate" jdbcType="INTEGER" />
+    <result column="gdname" property="gdname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    gdid, gdstate, gdname
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.pojo.GoodsdetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goodsdetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from goodsdetails
+    where gdid = #{gdid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goodsdetails
+    where gdid = #{gdid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.pojo.GoodsdetailsExample" >
+    delete from goodsdetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.pojo.Goodsdetails" >
+    insert into goodsdetails (gdid, gdstate, gdname
+      )
+    values (#{gdid,jdbcType=INTEGER}, #{gdstate,jdbcType=INTEGER}, #{gdname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.pojo.Goodsdetails" >
+    insert into goodsdetails
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gdid != null" >
+        gdid,
+      </if>
+      <if test="gdstate != null" >
+        gdstate,
+      </if>
+      <if test="gdname != null" >
+        gdname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gdid != null" >
+        #{gdid,jdbcType=INTEGER},
+      </if>
+      <if test="gdstate != null" >
+        #{gdstate,jdbcType=INTEGER},
+      </if>
+      <if test="gdname != null" >
+        #{gdname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.pojo.GoodsdetailsExample" resultType="java.lang.Integer" >
+    select count(*) from goodsdetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update goodsdetails
+    <set >
+      <if test="record.gdid != null" >
+        gdid = #{record.gdid,jdbcType=INTEGER},
+      </if>
+      <if test="record.gdstate != null" >
+        gdstate = #{record.gdstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.gdname != null" >
+        gdname = #{record.gdname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update goodsdetails
+    set gdid = #{record.gdid,jdbcType=INTEGER},
+    gdstate = #{record.gdstate,jdbcType=INTEGER},
+    gdname = #{record.gdname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.pojo.Goodsdetails" >
+    update goodsdetails
+    <set >
+      <if test="gdstate != null" >
+        gdstate = #{gdstate,jdbcType=INTEGER},
+      </if>
+      <if test="gdname != null" >
+        gdname = #{gdname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gdid = #{gdid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.pojo.Goodsdetails" >
+    update goodsdetails
+    set gdstate = #{gdstate,jdbcType=INTEGER},
+      gdname = #{gdname,jdbcType=VARCHAR}
+    where gdid = #{gdid,jdbcType=INTEGER}
+  </update>
+  <!--分支名称-->
+  <select id="getgoodsdetails" resultType="Goodsdetails" parameterType="int">
+
+  SELECT gdid,gdstate,gdname FROM goodsdetails WHERE  gdstate = #{gs}
+
+</select>
+
+
+</mapper>

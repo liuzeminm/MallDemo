@@ -1,0 +1,43 @@
+package cn.service.impl;
+import cn.dao.ICommodityDao;
+import cn.service.SelPageService;
+import cn.util.Page;
+import org.springframework.stereotype.Service;
+import javax.annotation.Resource;
+import java.util.logging.Logger;
+
+@Service("ssi")
+public class SelPageServiceImpl implements SelPageService {
+    //    log4j
+    private static Logger logger = Logger.getLogger(String.valueOf(SelPageServiceImpl.class));
+    @Resource(name = "ICommodityDao")
+    private ICommodityDao ispd;
+
+    public ICommodityDao getIspd() {
+        return ispd;
+    }
+
+    public void setIspd(ICommodityDao ispd) {
+        this.ispd = ispd;
+    }
+
+    int i = 0;
+
+    public int selCount(int state) {
+        i = ispd.selCount(state);
+        System.out.println(i);
+        return i;
+    }
+
+    public Page selClassAndDetails(int state,int index) {
+        Page a = new Page();
+        a.setTotalCount(i);
+        a.setPageSize(15);
+        a.setIndex(index);
+        a.setDeptlist(ispd.selDetails(state,(a.getIndex() - 1)*a.getPageSize(),a.getPageSize()));
+        return a;
+    }
+
+
+
+}

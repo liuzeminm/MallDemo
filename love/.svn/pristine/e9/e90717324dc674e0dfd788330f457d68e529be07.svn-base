@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.IUseriDao" >
+  <update id="updateuser">
+ <!--update useri set username=#{username}where userid=#{userid}-->
+          update useri
+          <trim prefix="set">
+              <if test="username != null" >
+                  username = #{username}
+              </if>
+              <if test=" usersex!= null">
+                  usersex = #{usersex}
+              </if>
+              <if test=" useroftensite != null">
+                  useroftensite = #{useroftensite}
+              </if>
+              <if test=" userdatebirth != null">
+                  userdatebirth = #{userdatebirth}
+              </if>
+              <if test=" userphone != null">
+                  userphone = #{userphone}
+              </if>
+              <if test=" userloginpassword != null">
+                  userloginpassword = #{userloginpassword}
+              </if>
+          </trim>
+          where userid = #{userid}
+  </update>
+
+    <select id="VerifySel" resultType="Useri">
+      select Username,Usersex,Useroftensite,Userdatebirth,Userphone,Userloginpassword from useri where userid = #{userid}
+    </select>
+    <select id="selectByPrimaryKey" resultType="Useri">
+    select * from useri where userphone = #{0} and userloginpassword = #{1}
+    </select>
+    <select id="selectByPrimaryKeyone" resultType="Useri">
+    select * from useri where userphone = #{userphone}
+    </select>
+</mapper>
+  <!--<resultMap id="BaseResultMap" type="cn.pojo.Useri" >-->
+    <!--<id column="userid" property="userid" jdbcType="INTEGER" />-->
+    <!--<result column="username" property="username" jdbcType="VARCHAR" />-->
+    <!--<result column="useravatar" property="useravatar" jdbcType="VARCHAR" />-->
+    <!--<result column="userloginpassword" property="userloginpassword" jdbcType="VARCHAR" />-->
+    <!--<result column="userpaymentpassword" property="userpaymentpassword" jdbcType="VARCHAR" />-->
+    <!--<result column="usergoodsreceivinginformation" property="usergoodsreceivinginformation" jdbcType="VARCHAR" />-->
+    <!--<result column="userlike" property="userlike" jdbcType="INTEGER" />-->
+    <!--<result column="usercomment" property="usercomment" jdbcType="VARCHAR" />-->
+    <!--<result column="userpotatostamps" property="userpotatostamps" jdbcType="VARCHAR" />-->
+    <!--<result column="usershoppingcart" property="usershoppingcart" jdbcType="INTEGER" />-->
+    <!--<result column="userreceivingaddress" property="userreceivingaddress" jdbcType="VARCHAR" />-->
+    <!--<result column="useridnumber" property="useridnumber" jdbcType="INTEGER" />-->
+    <!--<result column="usercollect" property="usercollect" jdbcType="INTEGER" />-->
+    <!--<result column="useridentification" property="useridentification" jdbcType="INTEGER" />-->
+    <!--<result column="usermessage" property="usermessage" jdbcType="INTEGER" />-->
+    <!--<result column="usermember" property="usermember" jdbcType="INTEGER" />-->
+    <!--<result column="userphone" property="userphone" jdbcType="VARCHAR" />-->
+    <!--<result column="userdatebirth" property="userdatebirth" jdbcType="DATE" />-->
+    <!--<result column="tentative1" property="tentative1" jdbcType="VARCHAR" />-->
+    <!--<result column="tentative2" property="tentative2" jdbcType="VARCHAR" />-->
+    <!--<result column="tentative3" property="tentative3" jdbcType="VARCHAR" />-->
+  <!--</resultMap>-->
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--userid, username, useravatar, userloginpassword, userpaymentpassword, usergoodsreceivinginformation, -->
+    <!--userlike, usercomment, userpotatostamps, usershoppingcart, userreceivingaddress, -->
+    <!--useridnumber, usercollect, useridentification, usermessage, usermember, userphone, -->
+    <!--userdatebirth, tentative1, tentative2, tentative3-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.pojo.UseriExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from useri-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap">-->
+    <!--select * from useri where userphone = #{0} and userloginpassword = #{1}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from useri-->
+    <!--where userid = #{userid,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="cn.pojo.UseriExample" >-->
+    <!--delete from useri-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="cn.pojo.Useri" >-->
+    <!--insert into useri (userid, username, useravatar, -->
+      <!--userloginpassword, userpaymentpassword, -->
+      <!--usergoodsreceivinginformation, userlike, -->
+      <!--usercomment, userpotatostamps, usershoppingcart, -->
+      <!--userreceivingaddress, useridnumber, usercollect, -->
+      <!--useridentification, usermessage, usermember, -->
+      <!--userphone, userdatebirth, tentative1, -->
+      <!--tentative2, tentative3)-->
+    <!--values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{useravatar,jdbcType=VARCHAR}, -->
+      <!--#{userloginpassword,jdbcType=VARCHAR}, #{userpaymentpassword,jdbcType=VARCHAR}, -->
+      <!--#{usergoodsreceivinginformation,jdbcType=VARCHAR}, #{userlike,jdbcType=INTEGER}, -->
+      <!--#{usercomment,jdbcType=VARCHAR}, #{userpotatostamps,jdbcType=VARCHAR}, #{usershoppingcart,jdbcType=INTEGER}, -->
+      <!--#{userreceivingaddress,jdbcType=VARCHAR}, #{useridnumber,jdbcType=INTEGER}, #{usercollect,jdbcType=INTEGER}, -->
+      <!--#{useridentification,jdbcType=INTEGER}, #{usermessage,jdbcType=INTEGER}, #{usermember,jdbcType=INTEGER}, -->
+      <!--#{userphone,jdbcType=VARCHAR}, #{userdatebirth,jdbcType=DATE}, #{tentative1,jdbcType=VARCHAR}, -->
+      <!--#{tentative2,jdbcType=VARCHAR}, #{tentative3,jdbcType=VARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="cn.pojo.Useri" >-->
+    <!--insert into useri-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="userid != null" >-->
+        <!--userid,-->
+      <!--</if>-->
+      <!--<if test="username != null" >-->
+        <!--username,-->
+      <!--</if>-->
+      <!--<if test="useravatar != null" >-->
+        <!--useravatar,-->
+      <!--</if>-->
+      <!--<if test="userloginpassword != null" >-->
+        <!--userloginpassword,-->
+      <!--</if>-->
+      <!--<if test="userpaymentpassword != null" >-->
+        <!--userpaymentpassword,-->
+      <!--</if>-->
+      <!--<if test="usergoodsreceivinginformation != null" >-->
+        <!--usergoodsreceivinginformation,-->
+      <!--</if>-->
+      <!--<if test="userlike != null" >-->
+        <!--userlike,-->
+      <!--</if>-->
+      <!--<if test="usercomment != null" >-->
+        <!--usercomment,-->
+      <!--</if>-->
+      <!--<if test="userpotatostamps != null" >-->
+        <!--userpotatostamps,-->
+      <!--</if>-->
+      <!--<if test="usershoppingcart != null" >-->
+        <!--usershoppingcart,-->
+      <!--</if>-->
+      <!--<if test="userreceivingaddress != null" >-->
+        <!--userreceivingaddress,-->
+      <!--</if>-->
+      <!--<if test="useridnumber != null" >-->
+        <!--useridnumber,-->
+      <!--</if>-->
+      <!--<if test="usercollect != null" >-->
+        <!--usercollect,-->
+      <!--</if>-->
+      <!--<if test="useridentification != null" >-->
+        <!--useridentification,-->
+      <!--</if>-->
+      <!--<if test="usermessage != null" >-->
+        <!--usermessage,-->
+      <!--</if>-->
+      <!--<if test="usermember != null" >-->
+        <!--usermember,-->
+      <!--</if>-->
+      <!--<if test="userphone != null" >-->
+        <!--userphone,-->
+      <!--</if>-->
+      <!--<if test="userdatebirth != null" >-->
+        <!--userdatebirth,-->
+      <!--</if>-->
+      <!--<if test="tentative1 != null" >-->
+        <!--tentative1,-->
+      <!--</if>-->
+      <!--<if test="tentative2 != null" >-->
+        <!--tentative2,-->
+      <!--</if>-->
+      <!--<if test="tentative3 != null" >-->
+        <!--tentative3,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="userid != null" >-->
+        <!--#{userid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="username != null" >-->
+        <!--#{username,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="useravatar != null" >-->
+        <!--#{useravatar,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userloginpassword != null" >-->
+        <!--#{userloginpassword,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userpaymentpassword != null" >-->
+        <!--#{userpaymentpassword,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="usergoodsreceivinginformation != null" >-->
+        <!--#{usergoodsreceivinginformation,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userlike != null" >-->
+        <!--#{userlike,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usercomment != null" >-->
+        <!--#{usercomment,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userpotatostamps != null" >-->
+        <!--#{userpotatostamps,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="usershoppingcart != null" >-->
+        <!--#{usershoppingcart,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="userreceivingaddress != null" >-->
+        <!--#{userreceivingaddress,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="useridnumber != null" >-->
+        <!--#{useridnumber,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usercollect != null" >-->
+        <!--#{usercollect,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="useridentification != null" >-->
+        <!--#{useridentification,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usermessage != null" >-->
+        <!--#{usermessage,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usermember != null" >-->
+        <!--#{usermember,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="userphone != null" >-->
+        <!--#{userphone,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userdatebirth != null" >-->
+        <!--#{userdatebirth,jdbcType=DATE},-->
+      <!--</if>-->
+      <!--<if test="tentative1 != null" >-->
+        <!--#{tentative1,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="tentative2 != null" >-->
+        <!--#{tentative2,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="tentative3 != null" >-->
+        <!--#{tentative3,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="cn.pojo.UseriExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from useri-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update useri-->
+    <!--<set >-->
+      <!--<if test="record.userid != null" >-->
+        <!--userid = #{record.userid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.username != null" >-->
+        <!--username = #{record.username,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.useravatar != null" >-->
+        <!--useravatar = #{record.useravatar,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.userloginpassword != null" >-->
+        <!--userloginpassword = #{record.userloginpassword,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.userpaymentpassword != null" >-->
+        <!--userpaymentpassword = #{record.userpaymentpassword,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.usergoodsreceivinginformation != null" >-->
+        <!--usergoodsreceivinginformation = #{record.usergoodsreceivinginformation,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.userlike != null" >-->
+        <!--userlike = #{record.userlike,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.usercomment != null" >-->
+        <!--usercomment = #{record.usercomment,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.userpotatostamps != null" >-->
+        <!--userpotatostamps = #{record.userpotatostamps,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.usershoppingcart != null" >-->
+        <!--usershoppingcart = #{record.usershoppingcart,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.userreceivingaddress != null" >-->
+        <!--userreceivingaddress = #{record.userreceivingaddress,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.useridnumber != null" >-->
+        <!--useridnumber = #{record.useridnumber,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.usercollect != null" >-->
+        <!--usercollect = #{record.usercollect,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.useridentification != null" >-->
+        <!--useridentification = #{record.useridentification,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.usermessage != null" >-->
+        <!--usermessage = #{record.usermessage,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.usermember != null" >-->
+        <!--usermember = #{record.usermember,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.userphone != null" >-->
+        <!--userphone = #{record.userphone,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.userdatebirth != null" >-->
+        <!--userdatebirth = #{record.userdatebirth,jdbcType=DATE},-->
+      <!--</if>-->
+      <!--<if test="record.tentative1 != null" >-->
+        <!--tentative1 = #{record.tentative1,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.tentative2 != null" >-->
+        <!--tentative2 = #{record.tentative2,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.tentative3 != null" >-->
+        <!--tentative3 = #{record.tentative3,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update useri-->
+    <!--set userid = #{record.userid,jdbcType=INTEGER},-->
+      <!--username = #{record.username,jdbcType=VARCHAR},-->
+      <!--useravatar = #{record.useravatar,jdbcType=VARCHAR},-->
+      <!--userloginpassword = #{record.userloginpassword,jdbcType=VARCHAR},-->
+      <!--userpaymentpassword = #{record.userpaymentpassword,jdbcType=VARCHAR},-->
+      <!--usergoodsreceivinginformation = #{record.usergoodsreceivinginformation,jdbcType=VARCHAR},-->
+      <!--userlike = #{record.userlike,jdbcType=INTEGER},-->
+      <!--usercomment = #{record.usercomment,jdbcType=VARCHAR},-->
+      <!--userpotatostamps = #{record.userpotatostamps,jdbcType=VARCHAR},-->
+      <!--usershoppingcart = #{record.usershoppingcart,jdbcType=INTEGER},-->
+      <!--userreceivingaddress = #{record.userreceivingaddress,jdbcType=VARCHAR},-->
+      <!--useridnumber = #{record.useridnumber,jdbcType=INTEGER},-->
+      <!--usercollect = #{record.usercollect,jdbcType=INTEGER},-->
+      <!--useridentification = #{record.useridentification,jdbcType=INTEGER},-->
+      <!--usermessage = #{record.usermessage,jdbcType=INTEGER},-->
+      <!--usermember = #{record.usermember,jdbcType=INTEGER},-->
+      <!--userphone = #{record.userphone,jdbcType=VARCHAR},-->
+      <!--userdatebirth = #{record.userdatebirth,jdbcType=DATE},-->
+      <!--tentative1 = #{record.tentative1,jdbcType=VARCHAR},-->
+      <!--tentative2 = #{record.tentative2,jdbcType=VARCHAR},-->
+      <!--tentative3 = #{record.tentative3,jdbcType=VARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="cn.pojo.Useri" >-->
+    <!--update useri-->
+    <!--<set >-->
+      <!--<if test="username != null" >-->
+        <!--username = #{username,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="useravatar != null" >-->
+        <!--useravatar = #{useravatar,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userloginpassword != null" >-->
+        <!--userloginpassword = #{userloginpassword,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userpaymentpassword != null" >-->
+        <!--userpaymentpassword = #{userpaymentpassword,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="usergoodsreceivinginformation != null" >-->
+        <!--usergoodsreceivinginformation = #{usergoodsreceivinginformation,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userlike != null" >-->
+        <!--userlike = #{userlike,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usercomment != null" >-->
+        <!--usercomment = #{usercomment,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userpotatostamps != null" >-->
+        <!--userpotatostamps = #{userpotatostamps,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="usershoppingcart != null" >-->
+        <!--usershoppingcart = #{usershoppingcart,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="userreceivingaddress != null" >-->
+        <!--userreceivingaddress = #{userreceivingaddress,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="useridnumber != null" >-->
+        <!--useridnumber = #{useridnumber,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usercollect != null" >-->
+        <!--usercollect = #{usercollect,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="useridentification != null" >-->
+        <!--useridentification = #{useridentification,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usermessage != null" >-->
+        <!--usermessage = #{usermessage,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usermember != null" >-->
+        <!--usermember = #{usermember,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="userphone != null" >-->
+        <!--userphone = #{userphone,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userdatebirth != null" >-->
+        <!--userdatebirth = #{userdatebirth,jdbcType=DATE},-->
+      <!--</if>-->
+      <!--<if test="tentative1 != null" >-->
+        <!--tentative1 = #{tentative1,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="tentative2 != null" >-->
+        <!--tentative2 = #{tentative2,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="tentative3 != null" >-->
+        <!--tentative3 = #{tentative3,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where userid = #{userid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="cn.pojo.Useri" >-->
+    <!--update useri-->
+    <!--set username = #{username,jdbcType=VARCHAR},-->
+      <!--useravatar = #{useravatar,jdbcType=VARCHAR},-->
+      <!--userloginpassword = #{userloginpassword,jdbcType=VARCHAR},-->
+      <!--userpaymentpassword = #{userpaymentpassword,jdbcType=VARCHAR},-->
+      <!--usergoodsreceivinginformation = #{usergoodsreceivinginformation,jdbcType=VARCHAR},-->
+      <!--userlike = #{userlike,jdbcType=INTEGER},-->
+      <!--usercomment = #{usercomment,jdbcType=VARCHAR},-->
+      <!--userpotatostamps = #{userpotatostamps,jdbcType=VARCHAR},-->
+      <!--usershoppingcart = #{usershoppingcart,jdbcType=INTEGER},-->
+      <!--userreceivingaddress = #{userreceivingaddress,jdbcType=VARCHAR},-->
+      <!--useridnumber = #{useridnumber,jdbcType=INTEGER},-->
+      <!--usercollect = #{usercollect,jdbcType=INTEGER},-->
+      <!--useridentification = #{useridentification,jdbcType=INTEGER},-->
+      <!--usermessage = #{usermessage,jdbcType=INTEGER},-->
+      <!--usermember = #{usermember,jdbcType=INTEGER},-->
+      <!--userphone = #{userphone,jdbcType=VARCHAR},-->
+      <!--userdatebirth = #{userdatebirth,jdbcType=DATE},-->
+      <!--tentative1 = #{tentative1,jdbcType=VARCHAR},-->
+      <!--tentative2 = #{tentative2,jdbcType=VARCHAR},-->
+      <!--tentative3 = #{tentative3,jdbcType=VARCHAR}-->
+    <!--where userid = #{userid,jdbcType=INTEGER}-->
+  <!--</update>-->
+<!--</mapper>-->

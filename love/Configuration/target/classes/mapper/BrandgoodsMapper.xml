@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dao.IBrandgoodsDao" >
+  <resultMap id="BaseResultMap" type="cn.pojo.Brandgoods" >
+    <id column="bgid" property="bgid" jdbcType="INTEGER" />
+    <result column="bgmerchandisecategories" property="bgmerchandisecategories" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    bgid, bgmerchandisecategories
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.pojo.BrandgoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brandgoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from brandgoods
+    where bgid = #{bgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from brandgoods
+    where bgid = #{bgid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.pojo.BrandgoodsExample" >
+    delete from brandgoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.pojo.Brandgoods" >
+    insert into brandgoods (bgid, bgmerchandisecategories)
+    values (#{bgid,jdbcType=INTEGER}, #{bgmerchandisecategories,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.pojo.Brandgoods" >
+    insert into brandgoods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bgid != null" >
+        bgid,
+      </if>
+      <if test="bgmerchandisecategories != null" >
+        bgmerchandisecategories,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bgid != null" >
+        #{bgid,jdbcType=INTEGER},
+      </if>
+      <if test="bgmerchandisecategories != null" >
+        #{bgmerchandisecategories,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.pojo.BrandgoodsExample" resultType="java.lang.Integer" >
+    select count(*) from brandgoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update brandgoods
+    <set >
+      <if test="record.bgid != null" >
+        bgid = #{record.bgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bgmerchandisecategories != null" >
+        bgmerchandisecategories = #{record.bgmerchandisecategories,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update brandgoods
+    set bgid = #{record.bgid,jdbcType=INTEGER},
+      bgmerchandisecategories = #{record.bgmerchandisecategories,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.pojo.Brandgoods" >
+    update brandgoods
+    <set >
+      <if test="bgmerchandisecategories != null" >
+        bgmerchandisecategories = #{bgmerchandisecategories,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bgid = #{bgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.pojo.Brandgoods" >
+    update brandgoods
+    set bgmerchandisecategories = #{bgmerchandisecategories,jdbcType=VARCHAR}
+    where bgid = #{bgid,jdbcType=INTEGER}
+  </update>
+</mapper>
