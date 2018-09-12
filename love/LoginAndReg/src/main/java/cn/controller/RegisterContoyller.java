@@ -31,7 +31,7 @@ public class RegisterContoyller {
      * @return
      */
     @ApiOperation(value="手机号 - 接口",notes = "输入手机号，进行注册")
-    @RequestMapping(value = "getPhone",method = RequestMethod.POST,produces ="text/html;charset=UTF-8" )
+    @RequestMapping(value = "getPhone",method = RequestMethod.GET,produces ="text/html;charset=UTF-8" )
 
     public String getPhone(@ApiParam( name="phonenum" ,value = "手机号",required=true)@RequestParam String phonenum,
                            HttpServletResponse response, HttpServletRequest request ){
@@ -53,7 +53,7 @@ public class RegisterContoyller {
      * @return
      */
     @ApiOperation(value="验证码 - 接口",notes = "填写手机获取的短信验证码")
-    @RequestMapping(value = "getvernum",method = RequestMethod.POST,produces ="text/html;charset=UTF-8" )
+    @RequestMapping(value = "getvernum",method = RequestMethod.GET,produces ="text/html;charset=UTF-8" )
     public String getvernum(@ApiParam( name="vernumber" ,value = "短信验证码",required=true)@RequestParam String vernumber,
                             HttpServletResponse response, HttpServletRequest request ){
         response.setHeader("Access-Control-Allow-Origin","*");
@@ -75,7 +75,7 @@ public class RegisterContoyller {
      * @return
      */
     @ApiOperation(value="添加更多信息 - 接口",notes = "性别、生日、用户名信息")
-    @RequestMapping(value = "insertinformation",method = RequestMethod.POST,produces ="text/html;charset=UTF-8" )
+    @RequestMapping(value = "insertinformation",method = RequestMethod.GET,produces ="text/html;charset=UTF-8" )
     public String insertinformation(@ApiParam( name="usersex",value = "性别",required=true)@RequestParam String usersex,
                                     @ApiParam( name="userbriday",value = "出生日期",required=true)@RequestParam String userbriday,
                                     @ApiParam( name="username",value = "用户名",required=true)@RequestParam String username,

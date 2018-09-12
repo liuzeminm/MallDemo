@@ -22,7 +22,7 @@ public class UpdVerServiceimpl implements UpdVerService {
      * @param type
      * @returnt
      */
-    @Override
+
     public Object verify(Useri ue,String type) {
         Useri us = id.VerifySel(ue);
         Object ob= "";

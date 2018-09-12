@@ -38,16 +38,16 @@ public class SearchStore {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name",value = "搜索商品",dataType = "String",paramType = "query"),
-            @ApiImplicitParam(name = "pageNo",value = "当前页数",dataType = "int",paramType = "query"),
-            @ApiImplicitParam(name = "pageSize",value = "页面大小",dataType = "int",paramType = "query")
+            @ApiImplicitParam(name = "pageNo",value = "当前页数",dataType = "int",paramType = "query")
     })
-    public String searchAll(@RequestParam(value = "name")String name, @RequestParam(value = "pageNo")int pageNo, @RequestParam(value = "pageSize")int pageSize,
+    public String searchAll(@RequestParam(value = "name")String name, @RequestParam(value = "pageNo")int pageNo,
                             HttpServletResponse response, HttpServletRequest request) throws IOException {
         response.setHeader("Access-Control-Allow-Origin","*");
         String namem = new String(name.getBytes("ISO8859-1"), "UTF-8");
             String names = "%" + namem + "%";
-            PageHelper.startPage(pageNo, pageSize);
+            PageHelper.startPage(pageNo, 10);
             list = ss.getAll(names);
+
             PageInfo page=new PageInfo(list);
             String pages = JSON.toJSONString(page);
             logger.info(pages);

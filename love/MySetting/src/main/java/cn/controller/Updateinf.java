@@ -26,7 +26,7 @@ public class Updateinf {
      * 修改用户名
      */
     @ApiOperation(value = "修改用户名 - 接口", notes = "根据已登录用户的ID")
-    @RequestMapping(value = "Updateusername",method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "Updateusername",method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     public Object Updateusername(@ApiParam(name = "id",value = "用户ID",required=true) @RequestParam int id,
                                  @ApiParam(name = "name",value = "用户姓名",required=true) @RequestParam String name,
                                          HttpServletResponse response, HttpServletRequest request ){
@@ -52,7 +52,7 @@ public class Updateinf {
      * 修改性别
      */
     @ApiOperation(value = "修改性别 - 接口", notes = "根据已登录用户的ID")
-    @RequestMapping(value = "Updateusersex",method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "Updateusersex",method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     public Object Updateusersex(@ApiParam(name = "id",value = "用户ID",required=true) @RequestParam int id,
                                      @ApiParam(name = "sex",value = "用户性别",required=true) @RequestParam String sex,
                                 HttpServletResponse response, HttpServletRequest request ){

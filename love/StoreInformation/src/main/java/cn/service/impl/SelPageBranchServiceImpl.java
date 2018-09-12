@@ -34,7 +34,7 @@ public class SelPageBranchServiceImpl implements SelPageBranchService {
         Page a = new Page();
         a.setTotalCount(i);
         System.out.println(i);
-        a.setPageSize(15);
+        a.setPageSize(10);
         a.setIndex(bindex);
         a.setDeptlist(ispd.selBranchDetails(bstate,(a.getIndex()-1)*a.getPageSize(),a.getPageSize()));
         return a;

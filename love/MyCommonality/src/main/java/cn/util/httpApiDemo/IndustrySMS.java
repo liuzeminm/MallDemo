@@ -25,6 +25,7 @@ public class IndustrySMS
 	 */
 	public static String execute(String to)
 	{
+
 		String tmpSmsContent = null;
 		try{
 			tmpSmsContent = URLEncoder.encode(templateid, "UTF-8");

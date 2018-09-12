@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Api(tags = "shoppingshow")
 @RestController
@@ -29,12 +31,11 @@ public class Shopshowcontrollr {
     }
     @ApiOperation(value = "shoppingshow", notes = "显示购物车")
     @RequestMapping(value = "/shopshow", method = RequestMethod.POST)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "stcomid",value = "商品id",dataType = "int", paramType="query")
-    })
     public String shopshow(
-            @RequestParam(value = "stuserid",required = false) Integer stuserid
+            @RequestParam(value = "stuserid",required = false) Integer stuserid,
+            HttpServletResponse response, HttpServletRequest request
     ){
+        response.setHeader("Access-Control-Allow-Origin","*");
         String shoppingshow = sss.shoppingshow(stuserid);
         return shoppingshow;
     }

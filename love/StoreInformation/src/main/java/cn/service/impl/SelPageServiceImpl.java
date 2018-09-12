@@ -32,7 +32,7 @@ public class SelPageServiceImpl implements SelPageService {
     public Page selClassAndDetails(int state,int index) {
         Page a = new Page();
         a.setTotalCount(i);
-        a.setPageSize(15);
+        a.setPageSize(10);
         a.setIndex(index);
         a.setDeptlist(ispd.selDetails(state,(a.getIndex() - 1)*a.getPageSize(),a.getPageSize()));
         return a;

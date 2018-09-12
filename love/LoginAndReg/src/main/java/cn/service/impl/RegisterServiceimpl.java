@@ -57,11 +57,12 @@ public class RegisterServiceimpl implements RegisterService {
         String ret;
         if (phone != null && phone != "") {
             int in = ui .VerifyPhone(phone);
-            System.out.println(in);
             if (in == 0) {
                 try {
+                    getJedis().set("pphone",phone);
                     getJedis().set("iphone", IndustrySMS.execute(phone));
-                    getJedis().expire("iphone", 60 * 2);
+                    getJedis().expire("iphone", 60 * 3);
+                    System.out.println(phone);
                     return JSON.toJSONString("y");
                 } catch (Exception e) {
                     ret = JSON.toJSONString("105");
@@ -111,19 +112,16 @@ public class RegisterServiceimpl implements RegisterService {
         String ret;
         Useri us = new Useri();
         if((sex!= null && sex!="")&& (brith!=null&&brith !="")&&(uname!=null&&uname!="")) {
-            if (Util.isSpecialChar(sex) || Util.isSpecialChar(brith) || Util.isSpecialChar(uname)) {
-                ret = JSON.toJSONString("不能是特殊字符或包含特殊字符");
-            }else{
-                us.setUserphone(getJedis().get("phone"));
-                us.setUsersex(sex);
-                us.setUserdatebirth(brith);
-                us.setUsername(uname);
-                int count = ui.ManyInf(us);
-                if (count == 0) {
-                    ret = JSON.toJSONString("no");
-                } else {
-                    ret = JSON.toJSONString("run");
-                }
+            us.setUserphone(getJedis().get("pphone"));
+            us.setUsersex(sex);
+            us.setUserdatebirth(brith);
+            us.setUsername(uname);
+            int count = ui.ManyInf(us);
+            if (count == 0) {
+                ret = JSON.toJSONString("no");
+            } else {
+                String a = ui.SelPwd(getJedis().get("pphone"));
+                ret = JSON.toJSONString(a);
             }
         }else{
             ret = "请把信息填写完整";

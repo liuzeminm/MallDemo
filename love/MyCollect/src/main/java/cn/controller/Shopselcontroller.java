@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Api(tags = "shoppinghave")
 @RestController
@@ -29,8 +31,10 @@ public class Shopselcontroller {
     @ApiOperation(value = "shoppinghave", notes = "该商品添加数量加1")
     @RequestMapping(value = "/trolley", method = RequestMethod.GET)
     public String trolley(
-            @RequestParam(value = "stcomid",required = false) Integer stcomid
+            @RequestParam(value = "stcomid",required = false) Integer stcomid,
+            HttpServletResponse response, HttpServletRequest request
     ){
+        response.setHeader("Access-Control-Allow-Origin","*");
         String quantity = sus.quantity(stcomid);
 
         return quantity;

@@ -50,6 +50,9 @@
     <select id="getOf" resultType="cn.pojo.Useri" parameterType="int">
     select userreceivingaddress from useri where userid = #{userid};
 </select>
+    <select id="SelPwd" resultType="String" parameterType="String">
+    select userloginpassword from useri where userphone = #{pwd}
+</select>
 </mapper>
   <!--<resultMap id="BaseResultMap" type="cn.pojo.Useri" >-->
     <!--<id column="userid" property="userid" jdbcType="INTEGER" />-->

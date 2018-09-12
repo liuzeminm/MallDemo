@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Page {
     private Integer index=1; // 当前页码
-    private Integer pageSize = 15; // 每页显示的条目数
+    private Integer pageSize = 10; // 每页显示的条目数
     private Integer totalCount; // 总记录数
     private Integer totalPageCount; //总页数
     private List<Commodity> deptlist = new ArrayList<Commodity>();//集合

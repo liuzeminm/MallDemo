@@ -71,7 +71,7 @@ public class SearchServiceImpl implements SearchService{
         List listAll = new ArrayList();
         long start = System.currentTimeMillis();
         List<Commodity> commodities = gacs.getAllCommditys(name);
-        long time = System.currentTimeMillis() - start;;
+        long time = System.currentTimeMillis() - start;
         String times = "查询用时" + time + "ms";
         if (commodities.size() != 0) {
             listAll.add(0, times);

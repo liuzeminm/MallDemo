@@ -63,5 +63,11 @@ public interface IUseriDao {
      * @return
      */
     int ManyInf (Useri u);
+    /**
+     * 查询默认密码，作为返回；
+     * @param phone
+     * @return
+     */
+    String SelPwd(@Param("pwd") String phone);
 
 }
